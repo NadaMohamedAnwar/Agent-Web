@@ -20,7 +20,7 @@ function Tasks() {
             try {
                 const token = sessionStorage.getItem('token'); // Retrieve token from localStorage
 
-                const response = await axios.get(`http://agentapp1.runasp.net/api/Organization/${organization}/Agents`, {
+                const response = await axios.get(`https://agentapp1.runasp.net/api/Organization/${organization}/Agents`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -37,7 +37,7 @@ function Tasks() {
             try {
                 const token = sessionStorage.getItem('token'); // Retrieve token from localStorage
 
-                const response = await axios.get('http://agentapp1.runasp.net/api/Client', {
+                const response = await axios.get('https://agentapp1.runasp.net/api/Client', {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -54,7 +54,7 @@ function Tasks() {
             try {
                 const token = sessionStorage.getItem('token'); // Retrieve token from localStorage
 
-                const response = await axios.get(`http://agentapp1.runasp.net/api/Visit/GetorganizationVisits/${organization}`, {
+                const response = await axios.get(`https://agentapp1.runasp.net/api/Visit/GetorganizationVisits/${organization}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -79,7 +79,7 @@ function Tasks() {
                 try {
                     const token = sessionStorage.getItem('token'); // Retrieve token from sessionStorage
             
-                    const response = await axios.get('http://agentapp1.runasp.net/api/AgentActivities', {
+                    const response = await axios.get('https://agentapp1.runasp.net/api/AgentActivities', {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }
@@ -92,7 +92,7 @@ function Tasks() {
             
                     const fetchSubmissionStatus = async (taskId) => {
                         try {
-                            const submissionResponse = await axios.get(`http://agentapp1.runasp.net/api/AgentActivities/${taskId}/Submission`, {
+                            const submissionResponse = await axios.get(`https://agentapp1.runasp.net/api/AgentActivities/${taskId}/Submission`, {
                                 headers: {
                                     Authorization: `Bearer ${token}`
                                 }

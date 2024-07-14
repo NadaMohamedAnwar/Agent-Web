@@ -16,7 +16,7 @@ function Task() {
         const fetchTask = async () => {
             try {
                 const token = sessionStorage.getItem('token');
-                const response = await axios.get(`http://agentapp1.runasp.net/api/Visit/${taskId}`, {
+                const response = await axios.get(`https://agentapp1.runasp.net/api/Visit/${taskId}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -38,7 +38,7 @@ function Task() {
                     const token = sessionStorage.getItem('token');
 
                     // Fetch agent
-                    const agentResponse = await axios.get(`http://agentapp1.runasp.net/api/Organization/${organization}/Agents/${task.agentId}`, {
+                    const agentResponse = await axios.get(`https://agentapp1.runasp.net/api/Organization/${organization}/Agents/${task.agentId}`, {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }
@@ -46,7 +46,7 @@ function Task() {
                     setAgent(agentResponse.data);
 
                     // Fetch client
-                    const clientResponse = await axios.get(`http://agentapp1.runasp.net/api/Client/${task.clientId}`, {
+                    const clientResponse = await axios.get(`https://agentapp1.runasp.net/api/Client/${task.clientId}`, {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }
@@ -97,7 +97,7 @@ function Task() {
                  <div>
                      <h5>مذكرة صوتية</h5>
                      <audio controls>
-                         <source src={`http://agentapp1.runasp.net${task.activityExecution.voicePath}`} type="audio/mp3" />
+                         <source src={`https://agentapp1.runasp.net${task.activityExecution.voicePath}`} type="audio/mp3" />
                      </audio>
                  </div>
              )}
@@ -105,7 +105,7 @@ function Task() {
                  <div>
                      <h5>صور</h5>
                      <div className='task-img'>
-                         <img src={`http://agentapp1.runasp.net${task.activityExecution.imagePath}`} alt="image" />
+                         <img src={`https://agentapp1.runasp.net${task.activityExecution.imagePath}`} alt="image" />
                      </div>
                  </div>
              )}

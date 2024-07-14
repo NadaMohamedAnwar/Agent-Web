@@ -15,7 +15,7 @@ function AddCategory(){
                 try {
                     const token = sessionStorage.getItem('token'); // Retrieve token from localStorage
 
-                    const response = await axios.post('http://agentapp1.runasp.net/api/Category', {
+                    const response = await axios.post('https://agentapp1.runasp.net/api/Category', {
                         name: name,
                     }, {
                         headers: {

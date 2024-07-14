@@ -10,7 +10,7 @@ function AdminPage(){
             try {
                 const token = sessionStorage.getItem('token'); // Retrieve token from localStorage
 
-                const response = await axios.get('http://agentapp1.runasp.net/api/Organization', {
+                const response = await axios.get('https://agentapp1.runasp.net/api/Organization', {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
