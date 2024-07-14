@@ -18,7 +18,7 @@ function Check() {
         const fetchTask = async () => {
             try {
                 const token = sessionStorage.getItem('token');
-                const response = await axios.get(`https://agentapp1.runasp.net/api/AgentActivities/${checkId}`, {
+                const response = await axios.get(`http://agentapp1.runasp.net/api/AgentActivities/${checkId}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -35,7 +35,7 @@ function Check() {
     const fetchSubmissionStatus = async () => {
         try {
             const token = sessionStorage.getItem('token');
-            const submissionResponse = await axios.get(`https://agentapp1.runasp.net/api/AgentActivities/${checkId}/Submission`, {
+            const submissionResponse = await axios.get(`http://agentapp1.runasp.net/api/AgentActivities/${checkId}/Submission`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -56,7 +56,7 @@ function Check() {
                     const token = sessionStorage.getItem('token');
 
                     // Fetch agent
-                    const agentResponse = await axios.get(`https://agentapp1.runasp.net/api/Organization/${organization}/Agents/${task.agentId}`, {
+                    const agentResponse = await axios.get(`http://agentapp1.runasp.net/api/Organization/${organization}/Agents/${task.agentId}`, {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }
@@ -64,13 +64,13 @@ function Check() {
                     setAgent(agentResponse.data);
 
                     // Fetch client
-                    const clientResponse = await axios.get(`https://agentapp1.runasp.net/api/Client/${task.clientId}`, {
+                    const clientResponse = await axios.get(`http://agentapp1.runasp.net/api/Client/${task.clientId}`, {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }
                     });
                     setClient(clientResponse.data);
-                    const checklistResponse = await axios.get(`https://agentapp1.runasp.net/api/Organization/${organization}/Checklist/${task.checkListId}`, {
+                    const checklistResponse = await axios.get(`http://agentapp1.runasp.net/api/Organization/${organization}/Checklist/${task.checkListId}`, {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }

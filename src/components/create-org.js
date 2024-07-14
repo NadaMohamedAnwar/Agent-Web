@@ -21,7 +21,7 @@ function CreateOrg() {
             try {
                 const token = sessionStorage.getItem('token'); // Retrieve token from localStorage
 
-                const response = await axios.post('https://agentapp1.runasp.net/api/Organization', {
+                const response = await axios.post('http://agentapp1.runasp.net/api/Organization', {
                     organizationName: name,
                     organizationStatus: status, // Assuming status is a string like "true" or "false"
                     licenseId: code,

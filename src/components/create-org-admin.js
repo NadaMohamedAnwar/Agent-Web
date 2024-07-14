@@ -19,7 +19,7 @@ function CreateOrgAdmin(){
             try {
                 const token = sessionStorage.getItem('token'); // Retrieve token from localStorage
 
-                const response = await axios.get('https://agentapp1.runasp.net/api/Organization', {
+                const response = await axios.get('http://agentapp1.runasp.net/api/Organization', {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -41,7 +41,7 @@ function CreateOrgAdmin(){
             try {
                 const token = sessionStorage.getItem('token'); // Retrieve token from localStorage
 
-                const response = await axios.post(`https://agentapp1.runasp.net/api/Organization/${organization}/OrgAdmin`, {
+                const response = await axios.post(`http://agentapp1.runasp.net/api/Organization/${organization}/OrgAdmin`, {
                     userStatus: status,
                     businessUserId: bussnisId, // Assuming status is a string like "true" or "false"
                     username: username,

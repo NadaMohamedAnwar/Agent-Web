@@ -10,7 +10,7 @@ function AddClient(){
             try {
                 const token = sessionStorage.getItem('token'); // Retrieve token from localStorage
 
-                const response = await axios.get('https://agentapp1.runasp.net/api/Category', {
+                const response = await axios.get('http://agentapp1.runasp.net/api/Category', {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -41,7 +41,7 @@ function AddClient(){
             try {
                 const token = sessionStorage.getItem('token');
 
-                const response = await axios.post('https://agentapp1.runasp.net/api/Client', {
+                const response = await axios.post('http://agentapp1.runasp.net/api/Client', {
                     accountAddress: accountAderss, // Assuming status is a string like "true" or "false"
                     accountName: name,
                     contactMobileNumber: num,

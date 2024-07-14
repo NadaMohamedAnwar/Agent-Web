@@ -17,7 +17,7 @@ function FinshTasks({tasks}){
             try {
                 const token = sessionStorage.getItem('token');
                 const agentPromises = tasks.map(t =>
-                    axios.get(`https://agentapp1.runasp.net/api/Organization/${organization}/Agents/${t.agentId}`, {
+                    axios.get(`http://agentapp1.runasp.net/api/Organization/${organization}/Agents/${t.agentId}`, {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }
@@ -37,7 +37,7 @@ function FinshTasks({tasks}){
             try {
                 const token = sessionStorage.getItem('token');
                 const clientPromises = tasks.map(t =>
-                    axios.get(`https://agentapp1.runasp.net/api/Client/${t.clientId}`, {
+                    axios.get(`http://agentapp1.runasp.net/api/Client/${t.clientId}`, {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }
