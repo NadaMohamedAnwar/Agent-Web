@@ -43,7 +43,7 @@ function Header(){
                     <div className="collapse navbar-collapse" id="collapsibleNavbar">
                         {user && user.role === 0 &&(
                             <>
-                                <NavLink style={s1} to={"/admin-page"}>المؤساسات</NavLink>
+                                <NavLink style={s1} to={"/admin-page"}>المؤسسات</NavLink>
                                 <NavLink style={s1} to={"/create-org"}>اضافة مؤسسة</NavLink>
                                 <NavLink style={s1} to={"/create-org-admin"}>اضافة مشرف مؤسسة</NavLink>
                                 <NavLink style={s1} to={"/add-category"}>اضافة فئة</NavLink>
@@ -53,7 +53,7 @@ function Header(){
                         {user && user.role === 1 &&(
                                 <>
                                     <NavLink style={s1} to={"/tasks"}>المهام</NavLink>
-                                    <NavLink style={s1} to={"/add-checklist"}>اضافة قائمة </NavLink>
+                                    <NavLink style={s1} to={"/checklists"}>القوائم</NavLink>
                                     <NavLink style={s1} to={"/add-client"}>اضافة عميل</NavLink>
                                     <NavLink style={s1} to={"/add-agent"}>اضافة عامل</NavLink>
                                     <NavLink style={s1} to={"/create-schedule"}>اضافة مهمة</NavLink>

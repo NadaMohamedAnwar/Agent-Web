@@ -17,7 +17,8 @@ import CreateOrgAdmin from './components/create-org-admin';
 import CreateSchedule from './components/create-schedule';
 import AddCategory from './components/add-category';
 import Check from './components/check';
-
+import Checklists from './components/checklists';
+import EditChecklist from './components/edit-checklist';
 function App() {
   return (
     <div>
@@ -35,7 +36,9 @@ function App() {
           <Route path='/create-org' element={<PrivateRoute component={CreateOrg} role={0} />} />
           <Route path='/add-agent' element={<PrivateRoute component={AddAgent} role={1} />} />
           <Route path='/add-client' element={<PrivateRoute component={AddClient} role={1} />} />
-          <Route path='/add-checklist' element={<PrivateRoute component={AddChecklist} role={1} />} />
+          <Route path='/checklists' element={<PrivateRoute component={Checklists} role={1} />} />
+          <Route path='/checklists/add-checklist' element={<PrivateRoute component={AddChecklist} role={1} />} />
+          <Route path='/checklists/edit-checklist/:listId' element={<PrivateRoute component={EditChecklist} role={1} />} />
           <Route path='/create-schedule' element={<PrivateRoute component={CreateSchedule} role={1} />} />
           <Route path='/logout' element={<Login />} />
         </Routes>

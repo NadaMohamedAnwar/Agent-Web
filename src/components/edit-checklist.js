@@ -3,10 +3,12 @@ import './style.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState,useEffect } from 'react';
-import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-function AddChecklist(){
+import axios from 'axios';
+function EditChecklist(){
     const navigate=useNavigate();
+    const { listId } = useParams();
     useEffect(() => {
         const fetcategories = async () => {
             try {
@@ -23,7 +25,27 @@ function AddChecklist(){
                 toast.error('Failed to fetch categories.');
             }
         };
+        const fetchlist = async () => {
+            try {
+                const token = sessionStorage.getItem('token'); // Retrieve token from localStorage
 
+                const response = await axios.get(`http://agentapp1.runasp.net/api/Organization/${organization}/Checklist/${listId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setname(response.data.name)
+                setquestions(response.data.questions)
+                setstatus(response.data.checkList_Status)
+                setchoseCategories(response.data.categoriesIds)
+                console.log(response.data)
+            } catch (error) {
+                console.error('Error fetching Checklists:', error);
+                toast.error('Failed to fetch Checklists.');
+            }
+        };
+
+        fetchlist();
         fetcategories();
     }, []);
     const [name,setname]=useState('');
@@ -55,14 +77,14 @@ function AddChecklist(){
         });
          toast.success('Question added successfully!');
     }
-    const addcheck=async ()=>{
+    const updateList=async ()=>{
          if(name==="" || status==="" || choseCategories.length === 0 || questions.length===0){
             toast.error('Please fill all fields');
          }else{
             try {
                 const token = sessionStorage.getItem('token'); // Retrieve token from localStorage
 
-                const response = await axios.post(`http://agentapp1.runasp.net/api/Organization/${organization}/Checklist`, {
+                const response = await axios.put(`http://agentapp1.runasp.net/api/Organization/${organization}/Checklist/${listId}`, {
                     name:name,
                     categoriesIds:choseCategories,
                     checkList_Status:status,
@@ -76,21 +98,25 @@ function AddChecklist(){
                 setname('');
                 setchoseCategories([]);
                 setquestions([]);
-                toast.success('Checklist added successfully!');
+                toast.success('Checklist updated successfully!');
                 setTimeout(() => {
                     navigate(-1);
                 }, 2000);
 
             } catch (error) {
                 console.error('Error', error);
-                toast.error('Failed to add checklist.');
+                toast.error('Failed to update checklist.');
             }
 
          }
     }
+    const delQuestion = (id) => {
+        setquestions(questions.filter(q => q.id !== id)); 
+        toast.success('Question deleted successfully!');
+    };
     return(
         <div className='col-sm-12 col-md-8 col-lg-4 t-parant'>
-            <h3 className='text-color'>اضافة قائمة </h3>
+            <h3 className='text-color'>تعديل قائمة </h3>
             <div className='org-par'>
                 <div>
                     <label>اسم القائمة</label>
@@ -139,16 +165,20 @@ function AddChecklist(){
                         <tbody>
                             {questions.map((q, index) => (
                                 <tr key={index}>
-                                    <td>{q.text}</td>
+                                    <td>
+                                        {q.text}
+                                        <i className="fas fa-trash icon-action" onClick={() => delQuestion(q.id)}></i>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 </div>
             </div>
-            <button onClick={addcheck}>اضافة قائمة</button>
+            <button onClick={updateList}>تعديل قائمة</button>
+            <button onClick={() => navigate(-1)}>الغاء</button>
             <ToastContainer />
         </div>
     )
 }
-export default AddChecklist;
+export default EditChecklist;

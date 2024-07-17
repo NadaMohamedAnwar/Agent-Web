@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 function PaddingTasks({tasks}){
     const organization=(JSON.parse(sessionStorage.getItem('user'))).organizationId;
     const x=useNavigate();
-    const id='id';
+
     const [agents, setAgents] = useState([]);
     const [clients, setclients] = useState([]);
     useEffect(() => {

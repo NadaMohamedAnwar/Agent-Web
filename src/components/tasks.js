@@ -119,8 +119,8 @@ function Tasks() {
                     setFinishChecklists(finishcheck);
                     setnewFinishChecklists(finishcheck);
                 } catch (error) {
-                    console.error('Error fetching clients:', error);
-                    toast.error('Failed to fetch clients.');
+                    console.error('Error fetching AgentActivities:', error);
+                    toast.error('Failed to fetch AgentActivities.');
                 }
             };
             

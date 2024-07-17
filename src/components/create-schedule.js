@@ -141,7 +141,7 @@ function CreateSchedule(){
     }
     return(
         <div className='col-sm-12 col-md-8 col-lg-4 t-parant'>
-        <h3>اضافة مهمة </h3>
+        <h3 className='text-color'>اضافة مهمة </h3>
         <div className='org-par'>
             <div>
                 <label>اسم المهمة</label>

@@ -79,7 +79,7 @@ function AddAgent(){
     }
     return(
         <div className='col-sm-12 col-md-8 col-lg-4 t-parant'>
-            <h3>اضافة عامل  </h3>
+            <h3 className='text-color'>اضافة عامل  </h3>
             <div className='org-par'>
                 <div>
                     <label>اسم المستخدم</label>

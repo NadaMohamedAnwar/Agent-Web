@@ -251,6 +251,7 @@ tr:hover{
     flex-wrap: wrap;
     border-radius: 10px;
     border: 1px solid green;
+    height: 350px;
 }
 .task-parameter div{
     width: 30%;
@@ -357,6 +358,7 @@ tr:hover{
 }
 .orgdiv{
     margin: auto;
+    margin-top: 50px;
 }
 .orgdiv table{
     outline: 1px solid green;
@@ -366,4 +368,33 @@ tr:hover{
     border: 1px solid green;
     width: 50%;
     padding: 10px;
+}
+/* =============================================== */
+.icon-action{
+    margin: 0px 10px;
+}
+table{
+    border: 1px solid green;
+}
+.add-btn{
+    border-radius: 20px;
+    height: 40px;
+    margin: 10px 0px 20px 0px;
+    border: none; 
+    color: white;
+    cursor: pointer; 
+    font-size: 16px; 
+    background: linear-gradient(90deg, green, orange);
+    width: 30%;
+}
+.check-head{
+    
+}
+.content-par{
+    text-align: right;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 }

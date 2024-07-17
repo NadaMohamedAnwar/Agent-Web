@@ -27,7 +27,7 @@ function AdminPage(){
     return(
         
             <div className='col-sm-12 col-md-11 col-lg-10 orgdiv'>
-                <h4 className='orghead text-color'>المؤساسات الحالية</h4>
+                <h4 className='orghead text-color'>المؤسسات الحالية</h4>
                 <table>
                     <thead>
                         <tr>

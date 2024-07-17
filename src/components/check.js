@@ -98,8 +98,10 @@ function Check() {
     };
     return (
         <div className='col-md-10 task-par'>
-            
-            <div className='col-sm-12 col-md-6 col-lg-6 task-parameter'>
+            <div className='col-md-10'>
+                <h2>بيانات المهمة</h2>
+            </div>
+            <div className='col-sm-12 col-md-6 col-lg-6 task-parameter'>     
                 <div>
                     <p>اسم النشاط</p>
                     <p>نوع النشاط</p>
