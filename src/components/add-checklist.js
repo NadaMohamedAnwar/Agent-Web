@@ -29,7 +29,6 @@ function AddChecklist(){
     const [name,setname]=useState('');
     const [categories,setcategories]=useState([]);
     const [question,setquestion]=useState({
-        id:0,
         text:"",
         note:"",
         available_image:false,
@@ -43,20 +42,21 @@ function AddChecklist(){
         const selectedOptions = Array.from(e.target.selectedOptions, option => option.value);
         setchoseCategories(selectedOptions);
       };
-    const addQuestion=()=>{
-        setquestion({...question , id : questions.length})
-         setquestions([...questions,question]);
-         setquestion({
-            id:0,
-            text:"",
-            note:"",
-            available_image:false,
-            available_Voice:false
+      const addQuestion = () => {
+       
+        setquestions([...questions, question]);
+        setquestion({
+            text: "",
+            note: "",
+            available_image: false,
+            available_Voice: false
         });
-         toast.success('Question added successfully!');
-    }
+    
+        toast.success('Question added successfully!');
+    };
+    
     const addcheck=async ()=>{
-         if(name==="" || status==="" || choseCategories.length === 0 || questions.length===0){
+        if(name==="" || choseCategories.length === 0 || questions.length===0){
             toast.error('Please fill all fields');
          }else{
             try {
@@ -70,23 +70,23 @@ function AddChecklist(){
 
                 }, {
                     headers: {
-                        Authorization: `Bearer ${token}` // Include token in Authorization header
+                        Authorization: `Bearer ${token}` 
                     }
                 });
+                toast.success('Checklist added successfully!');
                 setname('');
                 setchoseCategories([]);
                 setquestions([]);
-                toast.success('Checklist added successfully!');
-                setTimeout(() => {
+                setTimeout(()=>{
                     navigate(-1);
-                }, 2000);
-
-            } catch (error) {
+                },3000)
+               
+            }catch (error) {
                 console.error('Error', error);
                 toast.error('Failed to add checklist.');
             }
 
-         }
+        }
     }
     return(
         <div className='col-sm-12 col-md-8 col-lg-4 t-parant'>

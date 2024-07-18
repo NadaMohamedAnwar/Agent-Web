@@ -9,6 +9,10 @@ import axios from 'axios';
 function EditChecklist(){
     const navigate=useNavigate();
     const { listId } = useParams();
+    const [questions,setquestions]=useState([]);
+    const [status,setstatus]=useState(true);
+    const [choseCategories,setchoseCategories]=useState([])
+    const organization=(JSON.parse(sessionStorage.getItem('user'))).organizationId;
     useEffect(() => {
         const fetcategories = async () => {
             try {
@@ -38,7 +42,6 @@ function EditChecklist(){
                 setquestions(response.data.questions)
                 setstatus(response.data.checkList_Status)
                 setchoseCategories(response.data.categoriesIds)
-                console.log(response.data)
             } catch (error) {
                 console.error('Error fetching Checklists:', error);
                 toast.error('Failed to fetch Checklists.');
@@ -51,36 +54,36 @@ function EditChecklist(){
     const [name,setname]=useState('');
     const [categories,setcategories]=useState([]);
     const [question,setquestion]=useState({
-        id:0,
+        id:null,
         text:"",
         note:"",
         available_image:false,
         available_Voice:false
     });
-    const [questions,setquestions]=useState([]);
-    const [status,setstatus]=useState(true);
-    const [choseCategories,setchoseCategories]=useState([])
-    const organization=(JSON.parse(sessionStorage.getItem('user'))).organizationId;
+    
     const handleCategoryChange = (e) => {
         const selectedOptions = Array.from(e.target.selectedOptions, option => option.value);
         setchoseCategories(selectedOptions);
       };
-    const addQuestion=()=>{
-        setquestion({...question , id : questions.length})
-         setquestions([...questions,question]);
-         setquestion({
-            id:0,
-            text:"",
-            note:"",
-            available_image:false,
-            available_Voice:false
+      const addQuestion = () => {
+       
+        setquestions([...questions, question]);
+        setquestion({
+            id: null,
+            text: "",
+            note: "",
+            available_image: false,
+            available_Voice: false
         });
-         toast.success('Question added successfully!');
-    }
+    
+        toast.success('Question added successfully!');
+    };
+    
     const updateList=async ()=>{
-         if(name==="" || status==="" || choseCategories.length === 0 || questions.length===0){
+         if(name==="" || choseCategories.length === 0 || questions.length===0){
             toast.error('Please fill all fields');
          }else{
+            console.log(questions,choseCategories,status,name)
             try {
                 const token = sessionStorage.getItem('token'); // Retrieve token from localStorage
 
@@ -88,7 +91,7 @@ function EditChecklist(){
                     name:name,
                     categoriesIds:choseCategories,
                     checkList_Status:status,
-                    questions:questions
+                    questions:questions,
 
                 }, {
                     headers: {
@@ -101,7 +104,7 @@ function EditChecklist(){
                 toast.success('Checklist updated successfully!');
                 setTimeout(() => {
                     navigate(-1);
-                }, 2000);
+                }, 3000);
 
             } catch (error) {
                 console.error('Error', error);

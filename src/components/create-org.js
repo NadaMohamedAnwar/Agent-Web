@@ -45,7 +45,7 @@ function CreateOrg() {
                 setlow('');
                 sethigh('');
                 setcode('');
-                setstatus('');
+                setstatus(true);
                 setFIN('');
             } catch (error) {
                 console.error('Error adding organization:', error);

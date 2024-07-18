@@ -9,7 +9,6 @@ function FinshTasks({tasks}){
     const organization=(JSON.parse(sessionStorage.getItem('user'))).organizationId;
     const x=useNavigate();
     const id='id';
-    console.log("tasks",tasks)
     const [agents, setAgents] = useState([]);
     const [clients, setclients] = useState([]);
     useEffect(() => {

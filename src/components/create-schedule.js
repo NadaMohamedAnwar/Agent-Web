@@ -34,7 +34,7 @@ function CreateSchedule(){
                         Authorization: `Bearer ${token}`
                     }
                 });
-                setclients(response.data);
+                setclients(response.data.filter(c => c.organizationId == organization));
                 setClient(response.data[0].id)
             } catch (error) {
                 console.error('Error fetching clients:', error);

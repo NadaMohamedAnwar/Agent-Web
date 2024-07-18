@@ -11,6 +11,27 @@ function Task() {
     const [agent, setAgent] = useState(null);
     const [client, setClient] = useState(null);
     const organization = (JSON.parse(sessionStorage.getItem('user'))).organizationId;
+    // const [location, setLocation] = useState(null);
+    // const [error, setError] = useState(null);
+
+    // const getGeocodingData = async (latitude,longitude) => {
+    //     const apiKey = 'YOUR_GOOGLE_MAPS_API_KEY';
+    //     const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
+
+    //     try {
+    //     const response = await axios.get(url);
+    //     if (response.data.status === 'OK') {
+    //         setLocation(response.data.results[0].formatted_address);
+    //         setError(null);
+    //     } else {
+    //         setError('Unable to retrieve location');
+    //         setLocation(null);
+    //     }
+    //     } catch (error) {
+    //     setError('Error fetching data');
+    //     setLocation(null);
+    //     }
+    // };
 
     useEffect(() => {
         const fetchTask = async () => {
@@ -68,11 +89,12 @@ function Task() {
 
     return (
         <div className='col-md-10 task-par'>
-            
+            <div className='col-md-10'>
+                <h2 className='text-color'>بيانات المهمة</h2>
+            </div> 
             <div className='col-sm-12 col-md-6 col-lg-6 task-parameter'>
                 <div>
-                    <p>رقم الهوية</p>
-                    <p>اسم النشاط</p>
+                    <p>اسم المهمة</p>
                     <p>نوع النشاط</p>
                     <p>العميل</p>
                     <p>العامل</p>
@@ -81,7 +103,6 @@ function Task() {
                     <p>الموقع الفعلى</p>
                 </div>
                 <div>
-                    <p>{taskId}</p>
                     <p>{task.name}</p>
                     <p>زيارة</p>
                     <p>{client.accountName}</p>
@@ -111,7 +132,7 @@ function Task() {
              )}
              <div>
                  <h5>ملاحظات</h5>
-                 <p>كل شئ يبدو جيدا , فهم بحاجة فقط الى الاهتمام بالأشياء الهشة</p>
+                 <p>{task.activityExecution.note}</p>
              </div>
          </div>
            )}

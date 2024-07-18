@@ -42,7 +42,7 @@ function Tasks() {
                         Authorization: `Bearer ${token}`
                     }
                 });
-                setclients(response.data);
+                setclients(response.data.filter(c => c.organizationId == organization));
             } catch (error) {
                 console.error('Error fetching clients:', error);
                 toast.error('Failed to fetch clients.');
@@ -85,12 +85,13 @@ function Tasks() {
                         }
                     });
             
-                    const allTasks = response.data;
-            
+                    const allTasks = response.data.filter(t => t.organizationId == organization);
+                    console.log(response.data)
                     const paddingcheck = [];
                     const finishcheck = [];
             
                     const fetchSubmissionStatus = async (taskId) => {
+                        console.log(taskId)
                         try {
                             const submissionResponse = await axios.get(`http://agentapp1.runasp.net/api/AgentActivities/${taskId}/Submission`, {
                                 headers: {
@@ -105,10 +106,10 @@ function Tasks() {
             
                     const paddingcheckPromises = allTasks.map(async (task) => {
                         const submissionStatus = await fetchSubmissionStatus(task.id);
-                        if (submissionStatus === null) {
-                            paddingcheck.push(task);
-                        } else {
+                        if (submissionStatus != null) {
                             finishcheck.push(task);
+                        } else {
+                            paddingcheck.push(task);
                         }
                     });
             

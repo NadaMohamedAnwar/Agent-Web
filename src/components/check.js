@@ -40,7 +40,13 @@ function Check() {
                     Authorization: `Bearer ${token}`
                 }
             });
-             setsub(submissionResponse.data) // Assuming this returns the submission status
+            const checklistResponse = await axios.get(`http://agentapp1.runasp.net/api/Organization/${organization}/Checklist/${task.checkListId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            setchecklist(checklistResponse.data)
+            setsub(submissionResponse.data) // Assuming this returns the submission status
         } catch (error) {
             console.error('error', error);
             return null;
@@ -70,12 +76,7 @@ function Check() {
                         }
                     });
                     setClient(clientResponse.data);
-                    const checklistResponse = await axios.get(`http://agentapp1.runasp.net/api/Organization/${organization}/Checklist/${task.checkListId}`, {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    });
-                    setchecklist(checklistResponse.data)
+                   
                 } catch (error) {
                     console.error('Error fetching agent or client or checklist:', error);
                     toast.error('Failed to fetch agent or client or checklist.');
