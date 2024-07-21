@@ -119,7 +119,8 @@ function CreateSchedule(){
                         clientId:client,
                         agentId:agent,
                         plannedTime:date,
-                        checkListId:checklist
+                        checkListId:checklist,
+                        activityStatus:false
                     }, {
                         headers: {
                             Authorization: `Bearer ${token}` // Include token in Authorization header

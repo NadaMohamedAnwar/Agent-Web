@@ -86,39 +86,47 @@ function Tasks() {
                     });
             
                     const allTasks = response.data.filter(t => t.organizationId == organization);
-                    console.log(response.data)
-                    const paddingcheck = [];
-                    const finishcheck = [];
-            
-                    const fetchSubmissionStatus = async (taskId) => {
-                        console.log(taskId)
-                        try {
-                            const submissionResponse = await axios.get(`http://agentapp1.runasp.net/api/AgentActivities/${taskId}/Submission`, {
-                                headers: {
-                                    Authorization: `Bearer ${token}`
-                                }
-                            });
-                            return submissionResponse.data; 
-                        } catch (error) {
-                            return null;
-                        }
-                    };
-            
-                    const paddingcheckPromises = allTasks.map(async (task) => {
-                        const submissionStatus = await fetchSubmissionStatus(task.id);
-                        if (submissionStatus != null) {
-                            finishcheck.push(task);
-                        } else {
-                            paddingcheck.push(task);
-                        }
-                    });
-            
-                    await Promise.all(paddingcheckPromises);
-            
+                    console.log("activites",allTasks)
+                    const paddingcheck = allTasks.filter(t => t.activityStatus == false);
+
+                    const finishcheck = allTasks.filter(t => t.activityStatus == true);
                     setPaddingChecklists(paddingcheck);
                     setnewPaddingChecklists(paddingcheck);
                     setFinishChecklists(finishcheck);
                     setnewFinishChecklists(finishcheck);
+                    console.log(paddingChecklists,finishChecklists)
+            
+                    // const fetchSubmissionStatus = async (taskId) => {
+                    //     console.log(taskId)
+                    //     try {
+                    //         const submissionResponse = await axios.get(`http://agentapp1.runasp.net/api/CheckList/${taskId}/Submission`, {
+                    //             headers: {
+                    //                 Authorization: `Bearer ${token}`
+                    //             }
+                    //         });
+                    //         console.log("submit",submissionResponse.data)
+                    //         return submissionResponse.data; 
+  
+                    //     } catch (error) {
+                    //         return null;
+                    //     }
+                    // };
+            
+                    // const paddingcheckPromises = allTasks.map(async (task) => {
+                    //     const submissionStatus = await fetchSubmissionStatus(task.checkListId);
+                    //     if (submissionStatus != null) {
+                    //         finishcheck.push(task);
+                    //     } else {
+                    //         paddingcheck.push(task);
+                    //     }
+                    // });
+            
+                    // await Promise.all(paddingcheckPromises);
+            
+                    // setPaddingChecklists(paddingcheck);
+                    // setnewPaddingChecklists(paddingcheck);
+                    // setFinishChecklists(finishcheck);
+                    // setnewFinishChecklists(finishcheck);
                 } catch (error) {
                     console.error('Error fetching AgentActivities:', error);
                     toast.error('Failed to fetch AgentActivities.');

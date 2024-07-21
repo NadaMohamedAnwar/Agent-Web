@@ -24,6 +24,7 @@ function Check() {
                     }
                 });
                 setTask(response.data);
+                console.log(response.data)
             } catch (error) {
                 console.error('Error fetching task:', error);
                 toast.error('Failed to fetch task.');
@@ -31,30 +32,34 @@ function Check() {
         };
 
         fetchTask();
-    }, [checkId]);
-    const fetchSubmissionStatus = async () => {
-        try {
-            const token = sessionStorage.getItem('token');
-            const submissionResponse = await axios.get(`http://agentapp1.runasp.net/api/AgentActivities/${checkId}/Submission`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-            const checklistResponse = await axios.get(`http://agentapp1.runasp.net/api/Organization/${organization}/Checklist/${task.checkListId}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-            setchecklist(checklistResponse.data)
-            setsub(submissionResponse.data) // Assuming this returns the submission status
-        } catch (error) {
-            console.error('error', error);
-            return null;
+    }, []);
+    useEffect(() => {
+        const fetchSubmissionStatus = async () => {
+            try {
+                const token = sessionStorage.getItem('token');
+                const submissionResponse = await axios.get(`http://agentapp1.runasp.net/api/Checklist/${task.checkListId}/Submission`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                const checklistdata = await axios.get(`http://agentapp1.runasp.net/api/Organization/${organization}/Checklist/${task.checkListId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setchecklist(checklistdata.data);
+                setsub(submissionResponse.data.filter(task => task.activityAgentId == checkId));
+                console.log(checklistdata.data);
+                console.log(submissionResponse.data.filter(task => task.activityAgentId == checkId));
+            } catch (error) {
+                console.error('Error fetching submission status:', error);
+            }
+        };
+
+        if (type === "finish" && task) {
+            fetchSubmissionStatus();
         }
-    };
-    if(type === "finish"){
-        fetchSubmissionStatus();
-    }
+    }, [task]);
     useEffect(() => {
         const fetchAgentAndClient = async () => {
             if (task) {
@@ -68,7 +73,7 @@ function Check() {
                         }
                     });
                     setAgent(agentResponse.data);
-
+                     
                     // Fetch client
                     const clientResponse = await axios.get(`http://agentapp1.runasp.net/api/Client/${task.clientId}`, {
                         headers: {
@@ -85,9 +90,9 @@ function Check() {
         };
 
         fetchAgentAndClient();
-    }, [task, organization]);
+    }, [task]);
 
-    if (!task || !agent || !client) {
+    if (!task || !agent || !client || ! sub) {
         return <div>Loading...</div>;
     }
     const getquestion = (qID) => {
@@ -117,12 +122,12 @@ function Check() {
                     <p>{client.accountName}</p>
                     <p>{agent.username}</p>
                     <p>{task.plannedTime}</p>
-                    <p>{type==="finish" ? sub.submissionDate : 'N/A'}</p>
+                    <p>{(type==="finish" && sub) ? sub[0].submissionDate : 'N/A'}</p>
                 </div>
             </div>
-           {type ==='finish' &&(
+           {type === 'finish' && sub&&(
              <div className='col-sm-12 col-md-6 col-lg-6 about-task'>
-               {sub.answers.map((t)=>(
+               {sub[0].answers.map((t)=>(
                    <div  className='check-content'>
                     <div>
                         <h5>السؤال</h5>

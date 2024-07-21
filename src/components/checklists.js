@@ -41,7 +41,7 @@ function Checklists(){
                     }
                 });
 
-                const allTasks = response.data.filter(t => t.checkListId === id);
+                const allTasks = response.data.filter(t => t.checkListId == id);
 
                 // Delete each task related to the checklist
                 for (const task of allTasks) {
@@ -52,7 +52,7 @@ function Checklists(){
                             }
                         });
                     } catch (error) {
-                        console.error('Error deleting task:', error);
+                        console.error('Error deleting activity:', error);
                         toast.error('Failed to delete activity.');
                     }
                 }

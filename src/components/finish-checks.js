@@ -57,7 +57,7 @@ function FinshChecks({tasks}){
             try {
                 const token = sessionStorage.getItem('token');
                 const checkPromises = tasks.map(t =>
-                    axios.get(`http://agentapp1.runasp.net/api/AgentActivities/${t.id}/Submission`, {
+                    axios.get(`http://agentapp1.runasp.net/api/AgentActivities/${t.id}`, {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }
