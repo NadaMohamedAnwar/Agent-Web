@@ -42,8 +42,11 @@ function Checklists(){
                 });
 
                 const allTasks = response.data.filter(t => t.checkListId == id);
-
-                // Delete each task related to the checklist
+                let x=allTasks.find(c=>c.activityStatus == true)
+                if(x){
+                    toast.success('لا يمكن حذف هذه القائمة بسبب تواجد بيانات مرتبطة بيها');
+                }else{
+                    // Delete each task related to the checklist
                 for (const task of allTasks) {
                     try {
                         await axios.delete(`http://agentapp1.runasp.net/api/AgentActivities/${task.id}`, {
@@ -70,6 +73,9 @@ function Checklists(){
                     console.error('Error deleting checklist:', error);
                     toast.error('Failed to delete checklist.');
                 }
+                }
+
+                
             } catch (error) {
                 console.error('Error fetching tasks:', error);
                 toast.error('Failed to fetch tasks.');

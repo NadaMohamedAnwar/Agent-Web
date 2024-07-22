@@ -92,14 +92,14 @@ function Check() {
         fetchAgentAndClient();
     }, [task]);
 
-    if (!task || !agent || !client || ! sub) {
+    if (!task || !agent || !client ) {
         return <div>Loading...</div>;
     }
     const getquestion = (qID) => {
         if (!checklist) {
             return 'Loading...';
         }
-        const q = checklist.questions.find(a => a.id === qID);
+        const q = checklist.questions.find(a => a.id == qID);
         return q ? q.text : 'Question not found';
     };
     return (
@@ -125,7 +125,7 @@ function Check() {
                     <p>{(type==="finish" && sub) ? sub[0].submissionDate : 'N/A'}</p>
                 </div>
             </div>
-           {type === 'finish' && sub&&(
+           {type === 'finish' && sub &&(
              <div className='col-sm-12 col-md-6 col-lg-6 about-task'>
                {sub[0].answers.map((t)=>(
                    <div  className='check-content'>

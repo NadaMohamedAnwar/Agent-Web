@@ -53,26 +53,27 @@ function FinshChecks({tasks}){
             }
         };
         fetchclientsForTasks();
-        const fetchcheck = async () => {
-            try {
-                const token = sessionStorage.getItem('token');
-                const checkPromises = tasks.map(t =>
-                    axios.get(`http://agentapp1.runasp.net/api/AgentActivities/${t.id}`, {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    })
-                );
+        // const fetchcheck = async () => {
+        //     try {
+        //         const token = sessionStorage.getItem('token');
+        //         const checkPromises = tasks.map(t =>
+        //             axios.get(`http://agentapp1.runasp.net/api/Checklist/${t.checkListId}/Submission`, {
+        //                 headers: {
+        //                     Authorization: `Bearer ${token}`
+        //                 }
+        //             })
+        //         );
 
-                const checkResponses = await Promise.all(checkPromises);
-                const checkData = checkResponses.map(response => response.data);
-                setchecks(checkData);
-            } catch (error) {
-                console.error('Error fetching actual date:', error);
-                toast.error('Failed to fetch actual date.');
-            }
-        };
-        fetchcheck();
+        //         const checkResponses = await Promise.all(checkPromises);
+        //         const checkData = checkResponses.map(response => response.data);
+        //         console.log("checkData",checkData)
+        //         setchecks(checkData);
+        //     } catch (error) {
+        //         console.error('Error fetching actual date:', error);
+        //         toast.error('Failed to fetch actual date.');
+        //     }
+        // };
+        // fetchcheck();
         
     },[tasks]);
     const getAgentName = (agentId) => {
@@ -83,10 +84,11 @@ function FinshChecks({tasks}){
         const client = clients.find(a => a.id === clientId);
         return client ? client.accountName : 'Loading...';
     };
-    const getactualTime = (checkId) => {
-        const check = checks.find(a => a.activityAgentId === checkId);
-        return check ? check.submissionDate : 'Loading...';
-    };
+    // const getactualTime = (checkId) => {
+    //     console.log("id",checkId)
+    //     const check = checks.find(a => a.activityAgentId == checkId);
+    //     return check ? check.submissionDate : 'Loading...';
+    // };
     if (!tasks || tasks.length === 0) {
         return <div>No tasks available.</div>;
     }
@@ -98,7 +100,6 @@ function FinshChecks({tasks}){
                         <th> اسم المهمة</th>
                         <th> نوع النشاط</th>
                         <th>التاريخ والتوقيت المحدد</th>
-                        <th>التاريخ والتوقيت الفعلى</th>
                         <th> العميل</th>
                         <th> العامل</th>
 
@@ -110,7 +111,6 @@ function FinshChecks({tasks}){
                             <td>{t.name}</td>
                             <td>قائمة</td>
                             <td>{t.plannedTime}</td>
-                            <td>{getactualTime(t.id)}</td>
                             <td>{getclientName(t.clientId)}</td>
                             <td>{getAgentName(t.agentId)}</td>
                         </tr>
