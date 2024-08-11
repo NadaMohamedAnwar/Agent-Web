@@ -8,31 +8,9 @@ import axios from 'axios';
 function Task() {
     const { taskId } = useParams();
     const [task, setTask] = useState(null);
-    const [agent, setAgent] = useState(null);
-    const [client, setClient] = useState(null);
+    // const [agent, setAgent] = useState(null);
+    // const [client, setClient] = useState(null);
     const organization = (JSON.parse(sessionStorage.getItem('user'))).organizationId;
-    // const [location, setLocation] = useState(null);
-    // const [error, setError] = useState(null);
-
-    // const getGeocodingData = async (latitude,longitude) => {
-    //     const apiKey = 'YOUR_GOOGLE_MAPS_API_KEY';
-    //     const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
-
-    //     try {
-    //     const response = await axios.get(url);
-    //     if (response.data.status === 'OK') {
-    //         setLocation(response.data.results[0].formatted_address);
-    //         setError(null);
-    //     } else {
-    //         setError('Unable to retrieve location');
-    //         setLocation(null);
-    //     }
-    //     } catch (error) {
-    //     setError('Error fetching data');
-    //     setLocation(null);
-    //     }
-    // };
-
     useEffect(() => {
         const fetchTask = async () => {
             try {
@@ -43,6 +21,7 @@ function Task() {
                     }
                 });
                 setTask(response.data);
+                console.log(response.data)
             } catch (error) {
                 console.error('Error fetching task:', error);
                 toast.error('Failed to fetch task.');
@@ -52,41 +31,55 @@ function Task() {
         fetchTask();
     }, [taskId]);
 
-    useEffect(() => {
-        const fetchAgentAndClient = async () => {
-            if (task) {
-                try {
-                    const token = sessionStorage.getItem('token');
+    // useEffect(() => {
+    //     const fetchAgentAndClient = async () => {
+    //         if (task) {
+    //             try {
+    //                 const token = sessionStorage.getItem('token');
 
-                    // Fetch agent
-                    const agentResponse = await axios.get(`http://agentapp1.runasp.net/api/Organization/${organization}/Agents/${task.agentId}`, {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    });
-                    setAgent(agentResponse.data);
+    //                 // Fetch agent
+    //                 const agentResponse = await axios.get(`http://agentapp1.runasp.net/api/Organization/${organization}/Agents/${task.agentId}`, {
+    //                     headers: {
+    //                         Authorization: `Bearer ${token}`
+    //                     }
+    //                 });
+    //                 setAgent(agentResponse.data);
 
-                    // Fetch client
-                    const clientResponse = await axios.get(`http://agentapp1.runasp.net/api/Client/${task.clientId}`, {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    });
-                    setClient(clientResponse.data);
-                } catch (error) {
-                    console.error('Error fetching agent or client:', error);
-                    toast.error('Failed to fetch agent or client.');
-                }
-            }
-        };
+    //                 // Fetch client
+    //                 const clientResponse = await axios.get(`http://agentapp1.runasp.net/api/Client/${task.clientId}`, {
+    //                     headers: {
+    //                         Authorization: `Bearer ${token}`
+    //                     }
+    //                 });
+    //                 setClient(clientResponse.data);
+    //             } catch (error) {
+    //                 console.error('Error fetching agent or client:', error);
+    //                 toast.error('Failed to fetch agent or client.');
+    //             }
+    //         }
+    //     };
 
-        fetchAgentAndClient();
-    }, [task, organization]);
+    //     fetchAgentAndClient();
+    // }, [task, organization]);
 
-    if (!task || !agent || !client) {
+    if (!task) {
         return <div>Loading...</div>;
     }
-
+    const getLocationName = async (lat, lng) => {
+        try {
+          const response = await axios.get(`https://nominatim.openstreetmap.org/reverse`, {
+            params: {
+              format: 'json',
+              lat,
+              lon: lng,
+            }
+          });
+          return response.data.display_name || 'Unknown Location';
+        } catch (error) {
+          console.error('Error fetching location name:', error);
+          return 'Unknown Location';
+        }
+      };
     return (
         <div className='col-md-10 task-par'>
             <div className='col-md-10'>
@@ -100,13 +93,14 @@ function Task() {
                     <p>العامل</p>
                     <p>التاريخ والتوقيت المحدد</p>
                     <p>التاريخ والتوقيت الفعلى</p>
-                    <p>الموقع الفعلى</p>
+                    <p>(km)فرق المسافة</p>
+                    {/* <p>الموقع الفعلى</p> */}
                 </div>
                 <div>
                     <p>{task.name}</p>
                     <p>زيارة</p>
-                    <p>{client.accountName}</p>
-                    <p>{agent.username}</p>
+                    <p>{task.client.accountName}</p>
+                    <p>{task.agent.username}</p>
                     <p>{task.plannedTime}</p>
                     <p>{task.activityExecution ? task.activityExecution.activityActualTime : 'N/A'}</p>
                     <p>{task.activityExecution ? task.activityExecution.latitude : 'N/A'}</p>

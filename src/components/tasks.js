@@ -62,7 +62,6 @@ function Tasks() {
                 const allTasks = response.data;
                 const padding = allTasks.filter(task => task.activityExecution === null);
                 const finish = allTasks.filter(task => task.activityExecution !== null);
-
                 setPaddingTasks(padding);
                 setnewPaddingTasks(padding);
                 setFinishTasks(finish);
@@ -86,7 +85,7 @@ function Tasks() {
                     });
             
                     const allTasks = response.data.filter(t => t.organizationId == organization);
-                    console.log("activites",allTasks)
+                    // console.log("activites",allTasks)
                     const paddingcheck = allTasks.filter(t => t.activityStatus == false);
 
                     const finishcheck = allTasks.filter(t => t.activityStatus == true);
@@ -94,7 +93,7 @@ function Tasks() {
                     setnewPaddingChecklists(paddingcheck);
                     setFinishChecklists(finishcheck);
                     setnewFinishChecklists(finishcheck);
-                    console.log(paddingChecklists,finishChecklists)
+                    // console.log(paddingChecklists,finishChecklists)
             
                     // const fetchSubmissionStatus = async (taskId) => {
                     //     console.log(taskId)

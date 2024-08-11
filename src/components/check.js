@@ -24,7 +24,7 @@ function Check() {
                     }
                 });
                 setTask(response.data);
-                console.log(response.data)
+                console.log("task",response.data)
             } catch (error) {
                 console.error('Error fetching task:', error);
                 toast.error('Failed to fetch task.');
@@ -115,6 +115,7 @@ function Check() {
                     <p>العامل</p>
                     <p>التاريخ والتوقيت المحدد</p>
                     <p>التاريخ والتوقيت الفعلى</p>
+                    <p>(km)فرق المسافة</p>
                 </div>
                 <div>
                     <p>{task.name}</p>
@@ -123,6 +124,7 @@ function Check() {
                     <p>{agent.username}</p>
                     <p>{task.plannedTime}</p>
                     <p>{(type==="finish" && sub) ? sub[0].submissionDate : 'N/A'}</p>
+                    <p>{(type==="finish" && sub) ? sub[0].differnce_In_KM : 'N/A'}</p>
                 </div>
             </div>
            {type === 'finish' && sub &&(

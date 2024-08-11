@@ -22,7 +22,7 @@ function Login(){
         navigate('/admin-page');
       }
       if(user.role===1){
-        navigate('/tasks');
+        navigate('/map');
       }
     } catch (error) {
       console.error('Login error', error);

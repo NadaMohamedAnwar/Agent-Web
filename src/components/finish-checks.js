@@ -8,82 +8,81 @@ import { useNavigate } from 'react-router-dom';
 function FinshChecks({tasks}){
     const organization=(JSON.parse(sessionStorage.getItem('user'))).organizationId;
     const x=useNavigate();
-    const id='id';
-    const [agents, setAgents] = useState([]);
-    const [clients, setclients] = useState([]);
-    const [checks, setchecks] = useState([]);
-    useEffect(() => {
-        const fetchAgentsForTasks = async () => {
-            try {
-                const token = sessionStorage.getItem('token');
-                const agentPromises = tasks.map(t =>
-                    axios.get(`http://agentapp1.runasp.net/api/Organization/${organization}/Agents/${t.agentId}`, {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    })
-                );
+    // const [agents, setAgents] = useState([]);
+    // const [clients, setclients] = useState([]);
+    // const [checks, setchecks] = useState([]);
+    // useEffect(() => {
+    //     const fetchAgentsForTasks = async () => {
+    //         try {
+    //             const token = sessionStorage.getItem('token');
+    //             const agentPromises = tasks.map(t =>
+    //                 axios.get(`http://agentapp1.runasp.net/api/Organization/${organization}/Agents/${t.agentId}`, {
+    //                     headers: {
+    //                         Authorization: `Bearer ${token}`
+    //                     }
+    //                 })
+    //             );
 
-                const agentResponses = await Promise.all(agentPromises);
-                const agentsData = agentResponses.map(response => response.data);
-                setAgents(agentsData);
-            } catch (error) {
-                console.error('Error fetching agents:', error);
-                toast.error('Failed to fetch Agents.');
-            }
-        };
-        fetchAgentsForTasks();
-        const fetchclientsForTasks = async () => {
-            try {
-                const token = sessionStorage.getItem('token');
-                const clientPromises = tasks.map(t =>
-                    axios.get(`http://agentapp1.runasp.net/api/Client/${t.clientId}`, {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    })
-                );
+    //             const agentResponses = await Promise.all(agentPromises);
+    //             const agentsData = agentResponses.map(response => response.data);
+    //             setAgents(agentsData);
+    //         } catch (error) {
+    //             console.error('Error fetching agents:', error);
+    //             toast.error('Failed to fetch Agents.');
+    //         }
+    //     };
+    //     fetchAgentsForTasks();
+    //     const fetchclientsForTasks = async () => {
+    //         try {
+    //             const token = sessionStorage.getItem('token');
+    //             const clientPromises = tasks.map(t =>
+    //                 axios.get(`http://agentapp1.runasp.net/api/Client/${t.clientId}`, {
+    //                     headers: {
+    //                         Authorization: `Bearer ${token}`
+    //                     }
+    //                 })
+    //             );
 
-                const clientResponses = await Promise.all(clientPromises);
-                const clientData = clientResponses.map(response => response.data);
-                setclients(clientData);
-            } catch (error) {
-                console.error('Error fetching clients:', error);
-                toast.error('Failed to fetch clients.');
-            }
-        };
-        fetchclientsForTasks();
-        // const fetchcheck = async () => {
-        //     try {
-        //         const token = sessionStorage.getItem('token');
-        //         const checkPromises = tasks.map(t =>
-        //             axios.get(`http://agentapp1.runasp.net/api/Checklist/${t.checkListId}/Submission`, {
-        //                 headers: {
-        //                     Authorization: `Bearer ${token}`
-        //                 }
-        //             })
-        //         );
+    //             const clientResponses = await Promise.all(clientPromises);
+    //             const clientData = clientResponses.map(response => response.data);
+    //             setclients(clientData);
+    //         } catch (error) {
+    //             console.error('Error fetching clients:', error);
+    //             toast.error('Failed to fetch clients.');
+    //         }
+    //     };
+    //     fetchclientsForTasks();
+    //     // const fetchcheck = async () => {
+    //     //     try {
+    //     //         const token = sessionStorage.getItem('token');
+    //     //         const checkPromises = tasks.map(t =>
+    //     //             axios.get(`http://agentapp1.runasp.net/api/Checklist/${t.checkListId}/Submission`, {
+    //     //                 headers: {
+    //     //                     Authorization: `Bearer ${token}`
+    //     //                 }
+    //     //             })
+    //     //         );
 
-        //         const checkResponses = await Promise.all(checkPromises);
-        //         const checkData = checkResponses.map(response => response.data);
-        //         console.log("checkData",checkData)
-        //         setchecks(checkData);
-        //     } catch (error) {
-        //         console.error('Error fetching actual date:', error);
-        //         toast.error('Failed to fetch actual date.');
-        //     }
-        // };
-        // fetchcheck();
+    //     //         const checkResponses = await Promise.all(checkPromises);
+    //     //         const checkData = checkResponses.map(response => response.data);
+    //     //         console.log("checkData",checkData)
+    //     //         setchecks(checkData);
+    //     //     } catch (error) {
+    //     //         console.error('Error fetching actual date:', error);
+    //     //         toast.error('Failed to fetch actual date.');
+    //     //     }
+    //     // };
+    //     // fetchcheck();
         
-    },[tasks]);
-    const getAgentName = (agentId) => {
-        const agent = agents.find(a => a.id === agentId);
-        return agent ? agent.username : 'Loading...';
-    };
-    const getclientName = (clientId) => {
-        const client = clients.find(a => a.id === clientId);
-        return client ? client.accountName : 'Loading...';
-    };
+    // },[tasks]);
+    // const getAgentName = (agentId) => {
+    //     const agent = agents.find(a => a.id === agentId);
+    //     return agent ? agent.username : 'Loading...';
+    // };
+    // const getclientName = (clientId) => {
+    //     const client = clients.find(a => a.id === clientId);
+    //     return client ? client.accountName : 'Loading...';
+    // };
     // const getactualTime = (checkId) => {
     //     console.log("id",checkId)
     //     const check = checks.find(a => a.activityAgentId == checkId);
@@ -100,6 +99,8 @@ function FinshChecks({tasks}){
                         <th> اسم المهمة</th>
                         <th> نوع النشاط</th>
                         <th>التاريخ والتوقيت المحدد</th>
+                        <th>التاريخ والتوقيت المحدد</th>
+                        <th>(km)فرق المسافة</th>
                         <th> العميل</th>
                         <th> العامل</th>
 
@@ -111,8 +112,10 @@ function FinshChecks({tasks}){
                             <td>{t.name}</td>
                             <td>قائمة</td>
                             <td>{t.plannedTime}</td>
-                            <td>{getclientName(t.clientId)}</td>
-                            <td>{getAgentName(t.agentId)}</td>
+                            <td>{t.submission.submissionDate}</td>
+                            <td>{Math.round(t.submission.differnce_In_KM)}</td>
+                            <td>{t.client.accountName}</td>
+                            <td>{t.agent.username}</td>
                         </tr>
                     ) )}
                 </tbody>

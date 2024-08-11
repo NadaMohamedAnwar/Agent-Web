@@ -52,6 +52,7 @@ function Header(){
                         )}
                         {user && user.role === 1 &&(
                                 <>
+                                    <NavLink style={s1} to={"/map"}>الخريطة</NavLink>
                                     <NavLink style={s1} to={"/tasks"}>المهام</NavLink>
                                     <NavLink style={s1} to={"/checklists"}>القوائم</NavLink>
                                     <NavLink style={s1} to={"/add-client"}>اضافة عميل</NavLink>
