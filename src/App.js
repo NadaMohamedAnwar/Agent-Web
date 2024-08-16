@@ -20,6 +20,7 @@ import Check from './components/check';
 import Checklists from './components/checklists';
 import EditChecklist from './components/edit-checklist';
 import AgentsMap from './components/map';
+import AgentsMap2 from './components/agent-map';
 function App() {
   return (
     <div>
@@ -32,6 +33,7 @@ function App() {
           <Route path='/create-org-admin' element={<PrivateRoute component={CreateOrgAdmin} role={0} />} />
           <Route path='/tasks' element={<PrivateRoute component={Tasks} role={1} />} />
           <Route path='/map' element={<PrivateRoute component={AgentsMap} role={1} />} />
+          <Route path='/agent-map' element={<PrivateRoute component={AgentsMap2} role={1} />} />
           <Route path='/tasks/task/:taskId' element={<PrivateRoute component={Task} role={1} />} />
           <Route path='/tasks/check/:checkId/:type' element={<PrivateRoute component={Check} role={1} />} />
           <Route path='/add-category' element={<PrivateRoute component={AddCategory} role={0} />} />
