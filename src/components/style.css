@@ -67,6 +67,9 @@ body{
     font-size: 16px; 
     background: linear-gradient(90deg, green, orange);
 }
+.login-div button:focus{
+    opacity: .5;
+}
 .logo{
     width: 100%;
     height: 100%;
@@ -172,6 +175,9 @@ nav a{
     cursor: pointer; 
     font-size: 16px; 
 
+}
+.search-on-tasks button:focus{
+    opacity: .5;
 }
 select{
     border-radius: 20px;
@@ -314,7 +320,8 @@ tr:hover{
 }
 .org-par div label{
     width: 90%;
-}.t-parant button{
+}
+.t-parant button{
     border-radius: 20px;
     height: 40px;
     margin: 15px;
@@ -324,6 +331,9 @@ tr:hover{
     font-size: 16px; 
     background: linear-gradient(90deg, green, orange);
     width: 90%;
+}
+.t-parant button:focus{
+    opacity: .5;
 }
 #questionDiv{
     margin: 20px;
@@ -351,6 +361,9 @@ tr:hover{
     font-size: 16px; 
     background: linear-gradient(90deg, green, orange);
     width: 40%;
+}
+#questionDiv button:focus{
+    opacity: .5;
 }
 .orghead{
     text-align: center;
@@ -521,6 +534,9 @@ table{
     background: linear-gradient(90deg, green, orange);
     width: 40%;
     margin-right: 20px;
+}
+.btn-map:focus{
+    opacity: .5;
 }
 /* ================================================== */
 .modal {
